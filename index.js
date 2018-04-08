@@ -30,6 +30,7 @@ let formatPlaylist = function( file )
     let playlist = {
         name: fileData.name,
         description: fileData.description,
+        file: file,
         list: [],
         duration: 0,
         _duration: ""

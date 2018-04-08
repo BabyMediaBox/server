@@ -15,7 +15,7 @@
                     </ul>
                     </p>
                     <span class="btn btn-info" v-on:click="expandPlaylist(playlist, $event)">View playlist</span>
-                    <span class="btn btn-primary">Play playlist</span>
+                    <span class="btn btn-primary" v-on:click="playPlaylist(playlist, $event)">Play playlist</span>
                 </div>
             </div>
         </div>
@@ -25,6 +25,9 @@
 </template>
 
 <script>
+
+    import {MediaType} from '../../utils/MediaType';
+
     export default {
         name: 'dashboard',
         components: {},
@@ -46,6 +49,10 @@
             expandPlaylist: (playlist) =>
             {
                 playlist.expanded = !playlist.expanded;
+            },
+            playPlaylist: (playlist) =>
+            {
+                Socket.emit('play_media', { type : MediaType.playlist, src: playlist.file });
             }
         },
         data() {

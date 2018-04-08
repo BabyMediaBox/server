@@ -33,8 +33,8 @@
                 }
                 else
                 {
-                    this.type = data.type;
-                    this.src = data.src;
+                    this.queue = [];
+                    this.playItem( data );
                 }
             });
         },
