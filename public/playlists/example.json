@@ -1,0 +1,9 @@
+{
+    "name" : "Example",
+    "description": "Some description",
+    "list" : [
+        { "name" : "Example picture", "type" : 3, "src" : "pictures/example.jpeg", "duration": 10},
+        { "name" : "Example video", "type" : 1, "src" : "videos/example.mp4", "duration": 16},
+        { "name" : "Example youtube video", "type" : 2, "src" : "https://www.youtube.com/embed/cVFhMkOp8n4?autoplay=1&showinfo=0&controls=0", "duration": 145}
+    ]
+}

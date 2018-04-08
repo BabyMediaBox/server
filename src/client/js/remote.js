@@ -9,7 +9,8 @@ Vue.use(VueResource);
 Vue.use(VueRouter);
 
 import Dashboard from './remote/pages/Dashboard.vue';
-import Store from "./remote/store";
+import Playlists from './remote/pages/Playlists.vue';
+import Examples from './remote/pages/Examples.vue';
 
 import IO from 'socket.io-client';
 
@@ -17,7 +18,9 @@ let socket = IO();
 window.Socket = socket;
 
 const routes = [
-    { path: "/", component: Dashboard}
+    { path: "/", component: Dashboard},
+    { path: "/playlists", component: Playlists},
+    { path: "/examples", component: Examples }
 ];
 
 const router = new VueRouter({
@@ -26,6 +29,5 @@ const router = new VueRouter({
 
 new Vue({
     el: '#app',
-    store: Store,
     router: router
 });

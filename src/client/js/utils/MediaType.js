@@ -1,5 +1,6 @@
 export const MediaType = {
     video: 1,
     youtube: 2,
-    picture: 3
+    picture: 3,
+    playlist: 4
 };
