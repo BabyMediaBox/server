@@ -25,6 +25,19 @@
 
         mounted: function()
         {
+            Socket.on('test_rgb', () => {
+                this.rgb( 20, 20, 20);
+            });
+            Socket.on('test_rgb_sequence', () => {
+                this.rgbSequence( [
+                    [20, 20, 20],
+                    [200, 200, 200],
+                    [50, 50, 50]
+                ]);
+            });
+            Socket.on('reload_page', () => {
+                window.location.reload();
+            });
             Socket.on('play_media', ( data ) => {
                 console.log("play_media", data);
                 if( data.type === MediaType.playlist)
@@ -40,6 +53,22 @@
         },
 
         methods: {
+            rgbSequence( list )
+            {
+                return this.$http.post('http://localhost:3030/rgb/sequence', list, {})
+                    .then(resp => {
+                        console.log("rgb response", resp);
+                    });
+            },
+            rgb( r, g, b )
+            {
+                return this.$http.post('http://localhost:3030/rgb', { r: r, g: g, b: b}, {
+                    emulateJSON: true
+                })
+                .then(resp => {
+                    console.log("rgb response", resp);
+                });
+            },
             nextItem()
             {
                 if( this.queue.length > 0)

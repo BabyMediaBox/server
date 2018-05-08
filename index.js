@@ -63,4 +63,13 @@ io.on('connection', (socket) => {
     socket.on('play_media', function( data ){
         socket.broadcast.emit('play_media', data);
     });
+    socket.on('remote_reload_kiosk_page', function(){
+        socket.broadcast.emit('reload_page');
+    });
+    socket.on('remote_test_rgb', function(){
+        socket.broadcast.emit('test_rgb');
+    });
+    socket.on('remote_test_rgb_sequence', function(){
+        socket.broadcast.emit('test_rgb_sequence');
+    });
 });
