@@ -4,17 +4,25 @@
 
         <div class="examples">
             <ul class="list-group">
-                <li class="list-group-item" v-on:click="playPicture">
+				<li class="list-group-item">
+					<button class="w-100 btn btn-primary" v-on:click="playPicture">
                     Play example Picture
+					</button>
                 </li>
-                <li class="list-group-item" v-on:click="playVideo">
-                    Play example video
+                <li class="list-group-item">
+					<button class="w-100 btn btn-primary" v-on:click="playVideo">
+	                    Play example video
+					</button>
                 </li>
-                <li class="list-group-item" v-on:click="playYoutubeVideo">
+				<li class="list-group-item" >
+					<button class="w-100 btn btn-primary" v-on:click="playYoutubeVideo">
                     Play example youtube video
+					</button>
                 </li>
-                <li class="list-group-item" v-on:click="playPlaylist">
-                    Play example playlist
+				<li class="list-group-item">
+					<button class="w-100 btn btn-primary" v-on:click="playPlaylist">
+	                    Play example playlist
+					</button>
                 </li>
             </ul>
         </div>

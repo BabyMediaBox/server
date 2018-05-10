@@ -29,7 +29,7 @@
     import {MediaType} from '../../utils/MediaType';
 
     export default {
-        name: 'dashboard',
+        name: 'videos',
         components: {},
 
         mounted: function()

@@ -8,6 +8,7 @@ const Config = require('./config.json');
 const prettyMs = require('pretty-ms');
 
 const PlaylistDir = __dirname + "/public/playlists/";
+const VideosDir = __dirname + "/public/videos/";
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -69,6 +70,21 @@ app.get('/playlists', (req, res) => {
     });
 
     res.json( formated );
+});
+
+app.get('/videos', (req, res) => {
+    let files = fs.readdirSync(VideosDir, {});
+    let videos = [];
+
+    files.forEach( ( file ) => {
+        if( /\.json/.exec(file) )
+        {
+            let fileData = JSON.parse( fs.readFileSync( VideosDir + file ));
+            videos.push( fileData );
+        }
+    });
+
+    res.json( videos );
 });
 
 app.post('/button/:button', (req, res) => {

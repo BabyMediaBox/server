@@ -11,6 +11,7 @@ Vue.use(VueRouter);
 import Dashboard from './remote/pages/Dashboard.vue';
 import Playlists from './remote/pages/Playlists.vue';
 import Examples from './remote/pages/Examples.vue';
+import Videos from './remote/pages/Videos.vue';
 
 import IO from 'socket.io-client';
 
@@ -20,6 +21,7 @@ window.Socket = socket;
 const routes = [
     { path: "/", component: Dashboard},
     { path: "/playlists", component: Playlists},
+    { path: "/videos", component: Videos},
     { path: "/examples", component: Examples }
 ];
 

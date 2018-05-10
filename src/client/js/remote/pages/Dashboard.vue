@@ -2,18 +2,17 @@
     <div class="container" >
         <div class="dashboard">
             <router-link to="/playlists" class="w-100 btn btn-primary">Playlists</router-link>
+            <router-link to="/videos" class="w-100 btn btn-primary">Play video</router-link>
             <router-link to="/examples" class="w-100 btn btn-primary">Examples</router-link>
-            <div class="w-100 btn btn-info" v-on:click="reloadPage">Reload page</div>
-            <div class="w-100 btn btn-info" v-on:click="testRGBLedStrip">Test RGB Led strip single color</div>
-            <div class="w-100 btn btn-info" v-on:click="testRGBLedStripSequence">Test RGB Led strip sequence</div>
+            <button class="w-100 btn btn-info" v-on:click="reloadPage">Reload page</button>
+            <button class="w-100 btn btn-info" v-on:click="testRGBLedStrip">Test RGB Led strip single color</button>
+            <button class="w-100 btn btn-info" v-on:click="testRGBLedStripSequence">Test RGB Led strip sequence</button>
         </div>
         <div class="clear"></div>
     </div>
 </template>
 
 <script>
-    import {MediaType} from '../../utils/MediaType';
-
     export default {
         name: 'dashboard',
         components: {},
