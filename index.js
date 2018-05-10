@@ -1,13 +1,22 @@
 const express = require('express');
 const app = express();
 const server = require('http').Server(app);
+const bodyParser = require('body-parser');
 const io = require('socket.io')(server);
 const fs = require('fs');
+const Config = require('./config.json');
 const prettyMs = require('pretty-ms');
 
 const PlaylistDir = __dirname + "/public/playlists/";
 
-server.listen(3010);
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.text());
+app.use(bodyParser.json({ type: 'application/json'}));
+
+server.listen( Config.port, () => {
+    console.log("server started");
+});
 
 app.use( express.static('public') );
 
@@ -53,10 +62,22 @@ app.get('/playlists', (req, res) => {
     let files = fs.readdirSync(PlaylistDir, {});
     let formated = [];
     files.forEach( ( file ) => {
-        formated.push( formatPlaylist(file) );
+        if( /\.json/.exec(file) )
+        {
+            formated.push( formatPlaylist(file) );
+        }
     });
 
     res.json( formated );
+});
+
+app.post('/button/:button', (req, res) => {
+    console.log("button pressed", req.params.button, req.body );
+    if( req.body.item )
+    {
+        io.sockets.emit('button_pressed', req.body.item );
+    }
+    res.send('ok');
 });
 
 io.on('connection', (socket) => {

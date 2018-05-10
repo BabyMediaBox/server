@@ -25,6 +25,13 @@
 
         mounted: function()
         {
+            Socket.on('button_pressed', ( mediaItem ) => {
+                let item = JSON.parse(mediaItem);
+                if( item )
+                {
+                    this.playFromButton(item);
+                }
+            });
             Socket.on('test_rgb', () => {
                 this.rgb( 20, 20, 20);
             });
@@ -53,6 +60,22 @@
         },
 
         methods: {
+            playFromButton( mediaItem )
+            {
+                if( window.currentEndTimeout )
+                {
+                    clearTimeout(window.currentEndTimeout);
+                }
+                this.queue.unshift( function()
+                {
+                    this.scope.playItem.call( this.scope, this.item );
+                    window.currentEndTimeout = setTimeout( this.scope.nextItem, this.item.duration * 1000 );
+                }.bind({
+                    scope: this,
+                    item: mediaItem
+                }));
+                this.nextItem();
+            },
             rgbSequence( list )
             {
                 return this.$http.post('http://localhost:3030/rgb/sequence', list, {})
@@ -105,7 +128,7 @@
                         this.queue.push( function()
                         {
                             this.scope.playItem.call( this.scope, this.item );
-                            setTimeout( this.scope.nextItem, this.item.duration * 1000 );
+                            window.currentEndTimeout = setTimeout( this.scope.nextItem, this.item.duration * 1000 );
                         }.bind({
                             scope: this,
                             item: item
