@@ -1,3 +1,17 @@
 {
-    "port": 4010
+    "port": 4010,
+    "buttons": {
+        "1": [
+            { "name" : "Example video", "type" : 1, "src" : "videos/example.mp4", "duration": 80},
+            { "name" : "Example youtube video", "type" : 2, "src" : "https://www.youtube.com/embed/cVFhMkOp8n4?autoplay=1&showinfo=0&controls=0", "duration": 145}
+        ],
+        "2" : [
+            { "name" : "Example video", "type" : 1, "src" : "videos/example.mp4", "duration": 80},
+            { "name" : "Example youtube video", "type" : 2, "src" : "https://www.youtube.com/embed/cVFhMkOp8n4?autoplay=1&showinfo=0&controls=0", "duration": 145}
+        ],
+        "3" : [
+            { "name" : "Example video", "type" : 1, "src" : "videos/example.mp4", "duration": 80},
+            { "name" : "Example youtube video", "type" : 2, "src" : "https://www.youtube.com/embed/cVFhMkOp8n4?autoplay=1&showinfo=0&controls=0", "duration": 145}
+        ]
+    }
 }

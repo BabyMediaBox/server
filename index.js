@@ -72,6 +72,15 @@ app.get('/playlists', (req, res) => {
     res.json( formated );
 });
 
+app.get('/kiosk-buttons', (req, res) => {
+    let list = [];
+    if( Config['buttons'])
+    {
+        list = Config['buttons'];
+    }
+   res.json(list)
+});
+
 app.get('/videos', (req, res) => {
     let files = fs.readdirSync(VideosDir, {});
     let videos = [];

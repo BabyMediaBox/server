@@ -10,7 +10,7 @@ files.forEach( ( file ) =>
 {
     let filePath = VideosDir + '/' + file ;
     let fileMetaPath = VideosDir+'/'+file+'.json';
-    if (/\.mp4|m4v/.exec(file) && fs.existsSync( fileMetaPath ) === false && /\.json/.exec(file) === null )
+    if (/\.mp4|m4v|mkv|webm/.exec(file) && fs.existsSync( fileMetaPath ) === false && /\.json/.exec(file) === null )
     {
         let fileMeta = {
             "name" : file,
