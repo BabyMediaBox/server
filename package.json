@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "scan-videos": "NODE_PATH=. node src/scan/videos.js",
+    "process-videos": "NODE_PATH=. node src/process/videos.js",
     "dev-server": "nodemon -w index.js",
     "dev-build": "webpack --config webpack.js --watch",
     "build": "webpack --config webpack.js",

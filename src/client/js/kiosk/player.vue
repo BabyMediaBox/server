@@ -104,13 +104,38 @@
                     this.type = null;
                     this.src = null;
                     this.queue = [];
+                    this.rbgList = [];
                 }
 
             },
+            clearRgbTimer(){
+                if( this.rgbTimer )
+                {
+                    clearTimeout( this.rgbTimer);
+                    this.rgbTimer = null;
+                }
+            },
+            playItemRGB( )
+            {
+                this.clearRgbTimer();
+
+                if( this.rbgList.length > 0 )
+                {
+                    let rgbInfo = this.rbgList.shift();
+                    console.log("run rgb", rgbInfo);
+                    console.log("left", this.rbgList);
+                    this.rgb( rgbInfo.r, rgbInfo.g, rgbInfo.b );
+                    this.rgbTimer = setTimeout(this.playItemRGB, rgbInfo.stepTime * 1000 );
+                }
+            },
+
             playItem( item )
             {
                 this.type = item.type;
                 this.src = item.src;
+                this.rbgList = (item.rbgList) ? item.rbgList: [];
+                this.clearRgbTimer();
+                this.playItemRGB();
             },
 
             loadPlaylist( data )
@@ -118,6 +143,7 @@
                 this.type = null;
                 this.src = null;
                 this.queue = [];
+                this.rbgList = [];
 
                 this.$http.get('/playlists/'+data.src, {}, {
                     emulateJSON: true
@@ -145,6 +171,8 @@
                 MediaType : MediaType,
                 type : null,
                 src : null,
+                rgbTimer : null,
+                rbgList: [],
                 queue: []
             };
         },

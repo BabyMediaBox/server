@@ -48,7 +48,27 @@
                 Socket.emit('play_media', { type : MediaType.picture, src: 'pictures/example.jpeg'});
             },
             playVideo: function(){
-                Socket.emit('play_media', { type : MediaType.video, src: 'videos/example.mp4'});
+                Socket.emit('play_media', { 
+                    type : MediaType.video, 
+                    src: 'videos/example.webm', 
+                    "_duration": "16s",
+                    "duration": 16,
+                    "rbgList": [
+                        {
+                            "r": 97,
+                            "g": 69,
+                            "b": 175,
+                            "stepTime": 10,
+                            "startTime": 0
+                        },
+                        {
+                            "r": 96,
+                            "g": 138,
+                            "b": 114,
+                            "stepTime": 6,
+                            "startTime": 10
+                            }]
+                    });
             },
             playYoutubeVideo: function(){
                 Socket.emit('play_media', { type : MediaType.youtube, src: 'https://www.youtube.com/embed/cVFhMkOp8n4?autoplay=1&showinfo=0&controls=0'});
