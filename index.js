@@ -11,6 +11,7 @@ const PlaylistDir = __dirname + "/public/playlists/";
 const VideosDir = __dirname + "/public/videos/";
 
 let volume = 0;
+let kioskSerialConnected = false;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -33,7 +34,8 @@ app.get('/', (req, res) => {
 // Used by parents
 app.get('/remote', (req, res) => {
    res.render('remote', {
-       volume: volume
+       volume: volume,
+       kioskSerialConnected: kioskSerialConnected
    });
 });
 
@@ -97,6 +99,12 @@ app.post('/kiosk-volume', (req, res) => {
     {
         res.send('fail');
     }
+});
+
+app.post('/kiosk-serial-online', (req, res) => {
+    kioskSerialConnected = true;
+    io.sockets.emit('kiosk_serial_online');
+    res.send('ok');
 });
 
 app.get('/videos', (req, res) => {
