@@ -25,6 +25,18 @@
 
         mounted: function()
         {
+            Socket.on('set_kiosk_volume', ( volume ) => {
+                this.$http.post('http://localhost:3030/volume', { volume: volume }, {})
+                .then(resp => {
+                    console.log("set volume response", resp);
+                });
+            });
+            Socket.on('kiosk_shutdown', () => {
+                this.$http.post('http://localhost:3030/shutdown', {}, {})
+                    .then(resp => {
+                        console.log("shutdown response", resp);
+                    });
+            });
             Socket.on('button_pressed', ( mediaItem ) => {
                 let item = JSON.parse(mediaItem);
                 if( item )

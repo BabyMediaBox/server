@@ -1,15 +1,10 @@
 <template>
-    <div class="container" >
-        <router-link to="/" class="w-100 btn btn-primary">Home</router-link>
-
-        <div class="videos">
-            <ul class="list-group">
-                <li class="list-group-item" v-for="video in videos">
-                    <button class="w-100 btn btn-default" v-on:click="playVideo(video, $event)"> {{ video.name }} ( {{video._duration}} )</button>
-                </li>
-            </ul>
-        </div>
-        <div class="clear"></div>
+    <div class="videos">
+        <ul class="list-group">
+            <li class="list-group-item" v-for="video in videos">
+                <button class="w-100 btn btn-default" v-on:click="playVideo(video, $event)"> {{ video.name }} ( {{video._duration}} )</button>
+            </li>
+        </ul>
     </div>
 </template>
 

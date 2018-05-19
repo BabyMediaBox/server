@@ -58,6 +58,5 @@ typings/
 .env
 
 .idea/
-.jshintrc
 .vscode/
 config.json

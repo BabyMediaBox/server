@@ -24,6 +24,19 @@
 	                    Play example playlist
 					</button>
                 </li>
+
+                <li class="list-group-item">
+                    <button class="w-100 btn btn-primary" v-on:click="testRGBLedStrip">
+                        Test RGB Led strip single color
+                    </button>
+                </li>
+
+                <li class="list-group-item">
+                    <button class="w-100 btn btn-primary" v-on:click="testRGBLedStripSequence">
+                        Test RGB Led strip sequence
+                    </button>
+                </li>
+
             </ul>
         </div>
 
@@ -44,6 +57,12 @@
         },
 
         methods: {
+            testRGBLedStrip: () => {
+                Socket.emit('remote_test_rgb', {});
+            },
+            testRGBLedStripSequence: () => {
+                Socket.emit('remote_test_rgb_sequence', {});
+            },
             playPicture: function(){
                 Socket.emit('play_media', { type : MediaType.picture, src: 'pictures/example.jpeg'});
             },

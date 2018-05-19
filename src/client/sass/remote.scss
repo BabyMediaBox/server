@@ -1,6 +1,11 @@
 @import '~bootstrap/scss/bootstrap.scss';
 
+#pages{
+    margin-top: 8px;
+}
+
 #app {
+
     &>.container
     {
         padding-top: 12px;
@@ -17,4 +22,20 @@
             padding-top: 12px;
         }
     }
+}
+
+#main_nav
+{
+    .navbar-nav
+    {
+        .nav-item
+        {
+            margin-bottom: 4px;
+
+            .btn{
+                text-align: left;
+            }
+        }
+    }
+
 }

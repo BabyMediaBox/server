@@ -10,6 +10,8 @@ const prettyMs = require('pretty-ms');
 const PlaylistDir = __dirname + "/public/playlists/";
 const VideosDir = __dirname + "/public/videos/";
 
+let volume = 0;
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.text());
@@ -30,7 +32,9 @@ app.get('/', (req, res) => {
 
 // Used by parents
 app.get('/remote', (req, res) => {
-   res.render('remote');
+   res.render('remote', {
+       volume: volume
+   });
 });
 
 let formatPlaylist = function( file )
@@ -81,6 +85,20 @@ app.get('/kiosk-buttons', (req, res) => {
    res.json(list)
 });
 
+app.post('/kiosk-volume', (req, res) => {
+    if( req.body.volume )
+    {
+        volume = Math.floor(parseInt(req.body.volume)/10)*10;
+        console.log("receive kiosk volume", volume);
+        io.sockets.emit('kiosk_volume', volume );
+        res.send('ok');
+    }
+    else
+    {
+        res.send('fail');
+    }
+});
+
 app.get('/videos', (req, res) => {
     let files = fs.readdirSync(VideosDir, {});
     let videos = [];
@@ -106,6 +124,12 @@ app.post('/button/:button', (req, res) => {
 });
 
 io.on('connection', (socket) => {
+    socket.on('request_kiosk_shutdown', function(){
+        socket.broadcast.emit('kiosk_shutdown', data);
+    });
+    socket.on('request_setting_kiosk_volume', function(data) {
+       socket.broadcast.emit('set_kiosk_volume', data);
+    });
     socket.on('play_media', function( data ){
         socket.broadcast.emit('play_media', data);
     });

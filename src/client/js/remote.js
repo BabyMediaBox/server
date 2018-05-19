@@ -18,6 +18,7 @@ import IO from 'socket.io-client';
 let socket = IO();
 window.Socket = socket;
 
+
 const routes = [
     { path: "/", component: Dashboard},
     { path: "/playlists", component: Playlists},
@@ -29,7 +30,11 @@ const router = new VueRouter({
     routes
 });
 
+import App from './remote/App.vue';
+
 new Vue({
     el: '#app',
-    router: router
+    router: router,
+    template: '<App/>',
+    components: { App }
 });
