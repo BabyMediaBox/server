@@ -133,7 +133,7 @@ app.post('/button/:button', (req, res) => {
 
 io.on('connection', (socket) => {
     socket.on('request_kiosk_shutdown', function(){
-        socket.broadcast.emit('kiosk_shutdown', data);
+        socket.broadcast.emit('kiosk_shutdown');
     });
     socket.on('request_setting_kiosk_volume', function(data) {
        socket.broadcast.emit('set_kiosk_volume', data);
