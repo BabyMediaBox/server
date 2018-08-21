@@ -38,10 +38,9 @@
                     });
             });
             Socket.on('button_pressed', ( mediaItem ) => {
-                let item = JSON.parse(mediaItem);
-                if( item )
+                if( mediaItem )
                 {
-                    this.playFromButton(item);
+                    this.playFromButton(mediaItem);
                 }
             });
             Socket.on('test_rgb', () => {
@@ -103,8 +102,13 @@
                         console.log("rgb response", resp);
                     });
             },
+			setBodyColor( r, g, b)
+			{
+				document.getElementsByTagName('body')[0].style.backgroundColor="rgb("+r+","+g+","+b+")";
+			},
             rgb( r, g, b )
             {
+				this.setBodyColor(r, g, b);
                 return this.$http.post('http://localhost:3030/rgb', { r: r, g: g, b: b}, {
                     emulateJSON: true
                 })
@@ -116,7 +120,8 @@
 				this.type = null;
 				this.src = null;
 				this.queue = [];
-				this.rbgList = [];
+				this.rgbList = [];
+				this.setBodyColor(255, 255, 255);
 			},
             nextItem()
             {
@@ -142,9 +147,9 @@
             {
                 this.clearRgbTimer();
 
-                if( this.rbgList.length > 0 )
+                if( this.rgbList.length > 0 )
                 {
-                    let rgbInfo = this.rbgList.shift();
+                    let rgbInfo = this.rgbList.shift();
                     this.rgb( rgbInfo.r, rgbInfo.g, rgbInfo.b );
                     this.rgbTimer = setTimeout(this.playItemRGB, rgbInfo.stepTime * 1000 );
                 }
@@ -152,9 +157,10 @@
 
             playItem( item )
             {
+				console.log("playItem", item);
                 this.type = item.type;
                 this.src = item.src;
-				this.rbgList = (item.rbgList) ? item.rbgList: [];
+				this.rgbList = (item.rgbList) ? item.rgbList: [];
                 this.clearRgbTimer();
                 this.playItemRGB();
 
@@ -169,7 +175,7 @@
                 this.type = null;
                 this.src = null;
                 this.queue = [];
-                this.rbgList = [];
+                this.rgbList = [];
 
                 this.$http.get('/playlists/'+data.src, {}, {
                     emulateJSON: true
@@ -197,7 +203,7 @@
                 type : null,
                 src : null,
                 rgbTimer : null,
-                rbgList: [],
+				rgbList: [],
                 queue: []
             };
         },

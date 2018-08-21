@@ -29,7 +29,13 @@
         methods: {
             playVideo: (video) =>
             {
-                Socket.emit('play_media', { type : MediaType.video, src: "videos/"+video.file });
+				let payload = { type : MediaType.video, src: "videos/"+video.file };
+				console.log("send video", video);
+				if( video.rgbList )
+				{
+					payload.rgbList = video.rgbList;
+				}
+                Socket.emit('play_media', payload);
             }
         },
         data() {

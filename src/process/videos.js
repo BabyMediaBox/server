@@ -15,7 +15,7 @@ function writeMetaFile( converteFileName, convertedFilePath, fileMetaPath)
             "file": converteFileName,
             "src" : "videos/"+converteFileName,
             "type" : 1,
-            "rbgList" : [],
+            "rgbList" : [],
             "_duration": "",
             "duration" : 0
         };
@@ -30,7 +30,7 @@ function writeMetaFile( converteFileName, convertedFilePath, fileMetaPath)
         while( randomDuration < fileMeta.duration )
         {
             step = Math.floor(Math.random() * 25) + 5;
-            fileMeta.rbgList.push({
+            fileMeta.rgbList.push({
                 r : Math.floor(Math.random() * 256),
                 g : Math.floor(Math.random() * 256),
                 b : Math.floor(Math.random() * 256),
@@ -88,7 +88,7 @@ files.forEach( ( file ) =>
                             while( randomDuration < fileMeta.duration )
                             {
                                 step = Math.floor(Math.random() * 25) + 5;
-                                fileMeta.rbgList.push({
+                                fileMeta.rgbList.push({
                                     r : Math.floor(Math.random() * 256),
                                     g : Math.floor(Math.random() * 256),
                                     b : Math.floor(Math.random() * 256),

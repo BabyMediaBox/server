@@ -72,7 +72,7 @@
                     src: 'videos/example.webm', 
                     "_duration": "16s",
                     "duration": 16,
-                    "rbgList": [
+                    "rgbList": [
                         {
                             "r": 97,
                             "g": 69,

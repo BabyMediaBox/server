@@ -13,6 +13,12 @@ const VideosDir = __dirname + "/public/videos/";
 let volume = 0;
 let kioskSerialConnected = false;
 
+let mediaOnButtonPress = [];
+if( Config['buttons'])
+{
+	mediaOnButtonPress = Config['buttons'];
+}
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.text());
@@ -78,15 +84,6 @@ app.get('/playlists', (req, res) => {
     res.json( formated );
 });
 
-app.get('/kiosk-buttons', (req, res) => {
-    let list = [];
-    if( Config['buttons'])
-    {
-        list = Config['buttons'];
-    }
-   res.json(list)
-});
-
 app.post('/kiosk-volume', (req, res) => {
     if( req.body.volume )
     {
@@ -123,11 +120,8 @@ app.get('/videos', (req, res) => {
 });
 
 app.post('/button/:button', (req, res) => {
-    console.log("button pressed", req.params.button, req.body );
-    if( req.body.item )
-    {
-        io.sockets.emit('button_pressed', req.body.item );
-    }
+	var listIndex = Math.floor(Math.random() * mediaOnButtonPress[req.params.button].length );
+	io.sockets.emit('button_pressed', mediaOnButtonPress[req.params.button][listIndex] );
     res.send('ok');
 });
 
