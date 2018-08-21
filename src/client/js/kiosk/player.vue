@@ -4,7 +4,7 @@
             <img :src="src" />
         </div>
         <div class="h-100 w-100 media-wrapper" v-else-if="type === MediaType.video">
-            <video :src="src" autoplay></video>
+            <video @play="onVideoPlay" @ended="onVideoEnded" :src="src" id="video_player" autoplay></video>
         </div>
         <div class="h-100 w-100 media-wrapper" v-else-if="type === MediaType.youtube">
             <iframe width="100%" height="100%" :src="src" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
@@ -72,6 +72,14 @@
         },
 
         methods: {
+			onVideoPlay(){
+
+			},
+			onVideoEnded(){
+				console.log("video finished plaing");
+				this.clear();
+				this.nextItem();
+			},
             playFromButton( mediaItem )
             {
                 if( window.currentEndTimeout )
@@ -104,6 +112,12 @@
                     console.log("rgb response", resp);
                 });
             },
+			clear(){
+				this.type = null;
+				this.src = null;
+				this.queue = [];
+				this.rbgList = [];
+			},
             nextItem()
             {
                 if( this.queue.length > 0)
@@ -113,10 +127,7 @@
                 }
                 else
                 {
-                    this.type = null;
-                    this.src = null;
-                    this.queue = [];
-                    this.rbgList = [];
+                    this.clear();
                 }
 
             },
@@ -134,8 +145,6 @@
                 if( this.rbgList.length > 0 )
                 {
                     let rgbInfo = this.rbgList.shift();
-                    console.log("run rgb", rgbInfo);
-                    console.log("left", this.rbgList);
                     this.rgb( rgbInfo.r, rgbInfo.g, rgbInfo.b );
                     this.rgbTimer = setTimeout(this.playItemRGB, rgbInfo.stepTime * 1000 );
                 }
@@ -145,9 +154,14 @@
             {
                 this.type = item.type;
                 this.src = item.src;
-                this.rbgList = (item.rbgList) ? item.rbgList: [];
+				this.rbgList = (item.rbgList) ? item.rbgList: [];
                 this.clearRgbTimer();
                 this.playItemRGB();
+
+                if( this.type !== MediaType.video )
+				{
+					window.currentEndTimeout = setTimeout( this.nextItem, item.duration * 1000 );
+				}
             },
 
             loadPlaylist( data )
@@ -166,7 +180,6 @@
                         this.queue.push( function()
                         {
                             this.scope.playItem.call( this.scope, this.item );
-                            window.currentEndTimeout = setTimeout( this.scope.nextItem, this.item.duration * 1000 );
                         }.bind({
                             scope: this,
                             item: item
