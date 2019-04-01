@@ -71,7 +71,8 @@ const config = {
     mode: "development",
     entry: {
         kiosk: './src/client/js/kiosk.js',
-        remote: './src/client/js/remote.js'
+        remote: './src/client/js/remote.js',
+        manager: './src/client/js/manager.js'
     },
     output: {
         path: path.resolve(__dirname, 'public/js/'),

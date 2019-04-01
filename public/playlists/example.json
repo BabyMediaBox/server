@@ -1,9 +1,91 @@
 {
-    "name" : "Example",
+    "file": "example.json",
+    "name": "Example",
     "description": "Some description",
-    "list" : [
-        { "name" : "Example picture", "type" : 3, "src" : "pictures/example.jpeg", "duration": 10},
-        { "name" : "Example video", "type" : 1, "src" : "videos/example.mp4", "duration": 16},
-        { "name" : "Example youtube video", "type" : 2, "src" : "https://www.youtube.com/embed/cVFhMkOp8n4?autoplay=1&showinfo=0&controls=0", "duration": 145}
+    "list": [
+        {
+            "name": "Example picture",
+            "type": 3,
+            "src": "pictures/example.jpeg",
+            "duration": 10
+        },
+        {
+            "name": "Example video",
+            "type": 1,
+            "src": "videos/example.mp4",
+            "duration": 16
+        },
+        {
+            "name": "Example youtube video",
+            "type": 2,
+            "src": "https://www.youtube.com/embed/cVFhMkOp8n4?autoplay=1&showinfo=0&controls=0",
+            "duration": 145
+        },
+        {
+            "name": "Zaichenceto_bqlo.webm",
+            "file": "Zaichenceto_bqlo.webm",
+            "src": "videos/Zaichenceto_bqlo.webm",
+            "type": 1,
+            "rgbList": [
+                {
+                    "r": 46,
+                    "g": 205,
+                    "b": 212,
+                    "stepTime": 28,
+                    "startTime": 0
+                },
+                {
+                    "r": 180,
+                    "g": 15,
+                    "b": 159,
+                    "stepTime": 5,
+                    "startTime": 28
+                },
+                {
+                    "r": 41,
+                    "g": 86,
+                    "b": 12,
+                    "stepTime": 27,
+                    "startTime": 33
+                },
+                {
+                    "r": 0,
+                    "g": 57,
+                    "b": 137,
+                    "stepTime": 6,
+                    "startTime": 60
+                },
+                {
+                    "r": 186,
+                    "g": 93,
+                    "b": 30,
+                    "stepTime": 29,
+                    "startTime": 66
+                },
+                {
+                    "r": 150,
+                    "g": 231,
+                    "b": 172,
+                    "stepTime": 14,
+                    "startTime": 95
+                },
+                {
+                    "r": 137,
+                    "g": 4,
+                    "b": 151,
+                    "stepTime": 24,
+                    "startTime": 109
+                },
+                {
+                    "r": 139,
+                    "g": 134,
+                    "b": 89,
+                    "stepTime": 15,
+                    "startTime": 133
+                }
+            ],
+            "_duration": "2m 26s",
+            "duration": 146
+        }
     ]
 }

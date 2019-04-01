@@ -29,6 +29,10 @@
                         <button class="w-100 btn btn-default" v-on:click="reloadPage">Reload page</button>
                     </li>
 
+                    <li class="nav-item">
+                        <a  href="/manager" class="w-100 btn btn-default">Manager(Desktop)</a>
+                    </li>
+
                     <li class="nav-item  align-items-center">
                         <div class="btn-group w-100" role="group" aria-label="Basic example">
                             <button class="btn btn-outline-success col-3" type="button" v-on:click="decreaseVolume">-10%</button>

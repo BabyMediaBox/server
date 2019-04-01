@@ -45,6 +45,42 @@ app.get('/remote', (req, res) => {
    });
 });
 
+app.get('/manager', (req, res) => {
+    res.render('manager', {
+
+    });
+});
+
+app.get('/manager/all-videos', (req, res) => {
+    let files = fs.readdirSync(VideosDir, {});
+    let formated = [];
+    files.forEach( ( file ) => {
+        if( /\.json/.exec(file) )
+        {
+            let fileData = JSON.parse( fs.readFileSync(VideosDir + file ));
+            formated.push( fileData );
+        }
+    });
+
+    res.json( formated );
+});
+
+app.post('/manager/save-playlist/:file', (req, res) => {
+    let status = fs.writeFileSync(PlaylistDir + req.params.file, JSON.stringify(req.body, null, 4));
+    res.send( status );
+});
+
+app.post('/manager/delete-playlist/:file', (req, res) => {
+    if( req.params.file )
+    {
+        res.send( fs.unlinkSync( PlaylistDir+req.params.file )) ;
+    }
+    else
+    {
+        res.send('error');
+    }
+});
+
 let formatPlaylist = function( file )
 {
     let fileData = JSON.parse( fs.readFileSync(PlaylistDir + file ));
@@ -57,9 +93,15 @@ let formatPlaylist = function( file )
         duration: 0,
         _duration: ""
     };
+
     fileData.list.forEach( (item) => {
-        playlist.duration += item.duration;
-        item._duration = prettyMs( item.duration * 1000);
+
+        item._duration = '';
+        if(item.duration)
+        {
+            playlist.duration += item.duration;
+            item._duration = prettyMs( item.duration * 1000);
+        }
         playlist.list.push( item );
     });
     playlist._duration = prettyMs( playlist.duration * 1000);
@@ -74,6 +116,7 @@ app.get('/playlists/:playlist', (req, res) => {
 app.get('/playlists', (req, res) => {
     let files = fs.readdirSync(PlaylistDir, {});
     let formated = [];
+
     files.forEach( ( file ) => {
         if( /\.json/.exec(file) )
         {

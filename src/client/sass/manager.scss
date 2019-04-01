@@ -1,0 +1,59 @@
+@import '~bootstrap/scss/bootstrap.scss';
+
+#pages{
+    margin-top: 8px;
+
+    .playlist-preview-video
+    {
+        position: fixed;
+        right: 0;
+        top: 0;
+        background-color: white;
+
+        .media-wrapper
+        {
+            width: inherit;
+            video, iframe, img{
+                width: inherit;
+            }
+        }
+    }
+}
+
+#app {
+
+    &>.container
+    {
+        padding-top: 12px;
+
+        .dashboard
+        {
+            .btn{
+                margin-bottom: 12px;
+            }
+        }
+
+        .playlists, .examples
+        {
+            padding-top: 12px;
+        }
+    }
+
+
+}
+
+#main_nav
+{
+    .navbar-nav
+    {
+        .nav-item
+        {
+            margin-bottom: 4px;
+
+            .btn{
+                text-align: left;
+            }
+        }
+    }
+
+}
