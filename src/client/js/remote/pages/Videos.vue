@@ -1,7 +1,7 @@
 <template>
     <div class="videos">
         <ul class="list-group">
-            <li class="list-group-item" v-for="video in videos">
+            <li class="list-group-item" v-for="(video,index) in videos" :key="index">
                 <button class="w-100 btn btn-default" v-on:click="playVideo(video, $event)"> {{ video.name }} ( {{video._duration}} )</button>
             </li>
         </ul>

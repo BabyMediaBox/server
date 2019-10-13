@@ -1,6 +1,7 @@
 let webpack = require('webpack');
 let path = require('path');
 let ExtractTextPlugin = require('extract-text-webpack-plugin');
+let VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 function resolve (dir) {
     console.log( '=', path.join(__dirname, '..', dir));
@@ -86,6 +87,7 @@ const config = {
         }
     },
     plugins: [
+        new VueLoaderPlugin(),
         new webpack.DefinePlugin({
             IS_DEV: IS_DEV
         }),
@@ -134,7 +136,9 @@ const config = {
                 }, {
                     loader: "sass-loader",
                     options: {
-                        includePaths: [SASS_PATH]
+                        sassOptions: {
+                            includePaths: [SASS_PATH]
+                        }
                     }
                 }]
             }

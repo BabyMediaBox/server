@@ -4,7 +4,7 @@
             <a class="navbar-brand" href="#">
                 BabyMediaBox
                 <span v-if="kioskSerialConnected" class="badge badge-success">Remote</span>
-                <span v-else="kioskSerialConnected" class="badge badge-danger">Remote</span>
+                <span v-else class="badge badge-danger">Remote</span>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main_nav" aria-controls="main_nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>

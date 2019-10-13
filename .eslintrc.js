@@ -1,17 +1,19 @@
 module.exports = {
     root: true,
-    parser: 'babel-eslint',
     parserOptions: {
-        sourceType: 'module'
+        parser: "babel-eslint",
+        ecmaVersion: 2017,
+        sourceType: "module"
     },
     env: {
         browser: true,
     },
-    // https://github.com/standard/standard/blob/master/docs/RULES-en.md
-    extends: 'eslint:recommended',
+    extends: [
+        "plugin:vue/essential"
+    ],
     // required to lint *.vue files
     plugins: [
-        'html'
+        'vue'
     ],
     // add your custom rules here
     'rules': {

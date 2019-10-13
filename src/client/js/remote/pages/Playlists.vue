@@ -1,12 +1,12 @@
 <template>
     <div class="playlists">
-        <div class="card" v-for="playlist in playlists">
+        <div class="card" v-for="(playlist,index) in playlists" :key="index">
             <div class="card-body">
                 <h5 class="card-title">{{ playlist.name }} ( {{playlist._duration }})</h5>
                 <p class="card-text">
                     {{ playlist.description }}
                     <ul v-if="playlist.expanded === true" >
-                        <li class="nav-item" v-for="item in playlist.list">
+                        <li class="nav-item" v-for="(item,itemIndex) in playlist.list" :key="itemIndex">
                             {{ item.name }} ( {{item._duration}} )
                         </li>
                     </ul>

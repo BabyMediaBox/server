@@ -25,7 +25,7 @@ app.use(bodyParser.text());
 app.use(bodyParser.json({ type: 'application/json'}));
 
 server.listen( Config.port, () => {
-    console.log("server started");
+    console.log(`server started at port ${Config.port}`);
 });
 
 app.use( express.static('public') );

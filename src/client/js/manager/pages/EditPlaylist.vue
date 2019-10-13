@@ -29,7 +29,7 @@
         <div class="row">
             <div class="col-sm-4">
                 <h3>Playlist</h3>
-                <div class="card" v-for="(video, index) in playlist.list">
+                <div class="card" v-for="(video, index) in playlist.list" :key="index">
                     <div class="card-body">
                         <h5 class="card-title">{{ video.name }} ({{video.duration}})</h5>
                         <p class="card-text">
@@ -52,7 +52,7 @@
 
             <div class="col-sm-4">
                 <h3>All videos</h3>
-                <div class="card " v-for="video in allVideos">
+                <div class="card " v-for="(video,index) in allVideos" :key="index">
                     <div class="card-body">
                         <h5 class="card-title">{{ video.name }} ({{video.duration}})</h5>
                         <p class="card-text">

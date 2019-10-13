@@ -1,7 +1,7 @@
 <template>
     <div class="playlists">
         <router-link :to='{ name : "EditPlaylist", params : { file: ""} }' class=" btn btn-info">Create new playlist</router-link>
-        <div class="card" v-for="playlist in playlists">
+        <div class="card" v-for="(playlist,index) in playlists" :key="index">
             <div class="card-body">
                 <h5 class="card-title">{{ playlist.name }} - <i>{{playlist.file}}</i> ( {{playlist._duration }})</h5>
                 <p class="card-text">
