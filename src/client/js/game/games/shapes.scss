@@ -1,0 +1,18 @@
+.game-shapes
+{
+	.game-view
+	{
+		.img-thumbnail
+		{
+			&.wrong{
+				background-color: rgba(255, 0, 56, 0.4);
+			}
+			&.correct{
+				background-color: rgba(105, 245, 157, 0.29);
+			}
+			&.pending{
+				background-color: rgba(232, 232, 232, 0.59);
+			}
+		}
+	}
+}

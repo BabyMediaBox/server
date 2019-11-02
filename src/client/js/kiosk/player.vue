@@ -18,6 +18,7 @@
 
 <script>
     import {MediaType} from '../utils/MediaType';
+    import MODES from '../../../enums/Mode';
 
     export default {
         components: {
@@ -25,6 +26,16 @@
 
         mounted: function()
         {
+            Socket.on('change_mode', (mode) => {
+                if(mode === MODES.GAME)
+                {
+                    window.location.href = '/game';
+                }
+                else if( mode === MODES.MEDIA )
+                {
+                    window.location.href = '/';
+                }
+            });
             Socket.on('set_kiosk_volume', ( volume ) => {
                 this.$http.post('http://localhost:3030/volume', { volume: volume }, {})
                 .then(resp => {
@@ -37,7 +48,7 @@
                         console.log("shutdown response", resp);
                     });
             });
-            Socket.on('button_pressed', ( mediaItem ) => {
+            Socket.on('media_button_pressed', ( mediaItem ) => {
                 if( mediaItem )
                 {
                     this.playFromButton(mediaItem);
