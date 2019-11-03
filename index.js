@@ -9,10 +9,11 @@ const prettyMs = require('pretty-ms');
 
 const PlaylistDir = __dirname + "/public/playlists/";
 const VideosDir = __dirname + "/public/videos/";
+const MODES = require('./src/enums/Mode');
 
 let volume = 0;
 let kioskSerialConnected = false;
-
+let mode = MODES.MEDIA;
 let mediaOnButtonPress = [];
 if( Config['buttons'])
 {
@@ -35,6 +36,10 @@ app.set('view engine', 'ejs');
 // Used in the kiosk client
 app.get('/', (req, res) => {
     res.render('index');
+});
+
+app.get('/game', (req, res) => {
+   res.render('game');
 });
 
 // Used by parents
@@ -163,8 +168,29 @@ app.get('/videos', (req, res) => {
 });
 
 app.post('/button/:button', (req, res) => {
-	var listIndex = Math.floor(Math.random() * mediaOnButtonPress[req.params.button].length );
-	io.sockets.emit('button_pressed', mediaOnButtonPress[req.params.button][listIndex] );
+    let button = parseInt(req.params.button, 10);
+    if( mode === MODES.MEDIA && Config.mediaButtons.indexOf(button) > -1 )
+    {
+        var listIndex = Math.floor(Math.random() * mediaOnButtonPress[req.params.button].length );
+        io.sockets.emit('media_button_pressed', mediaOnButtonPress[req.params.button][listIndex] );
+        res.send('ok');
+    }
+    else if( button === Config.toggleModeButton )
+    {
+        if( mode === MODES.GAME )
+        {
+            mode = MODES.MEDIA;
+        }
+        else if( mode === MODES.MEDIA )
+        {
+            mode = MODES.GAME;
+        }
+        io.sockets.emit('change_mode', mode);
+    }
+    else
+    {
+        io.sockets.emit('button_pressed', button);
+    }
     res.send('ok');
 });
 

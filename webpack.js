@@ -71,6 +71,7 @@ let vueLoaderConfig = {
 const config = {
     mode: "development",
     entry: {
+        game: './src/client/js/game.js',
         kiosk: './src/client/js/kiosk.js',
         remote: './src/client/js/remote.js',
         manager: './src/client/js/manager.js'
