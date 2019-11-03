@@ -1,6 +1,6 @@
 {
   "name": "babymediabox-server",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Server that stores and manages what is played in the BabyMediaBox kiosk",
   "main": "index.js",
   "scripts": {
