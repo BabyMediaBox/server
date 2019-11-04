@@ -25,6 +25,7 @@
 
 <script>
 	require('./shapes.scss');
+	import RgbMixin from './../../mixins/Rgb';
 	const options = {
 		4 : { name: "circle", src: "pictures/shapes/circle.png" },
 		5 : { name: "square", src: "pictures/shapes/square.png" },
@@ -35,6 +36,9 @@
 	const indexOptions = [4, 5, 6, 7];
 
 	export default {
+
+		mixins: [RgbMixin],
+
 		components: {
 		},
 
@@ -49,17 +53,20 @@
 				this.optionIndex = indexOptions[Math.floor(Math.random() * 4)];
 				this.option = options[this.optionIndex];
 				this.statusCls = 'pending';
+				this.rgbClear();
 			},
 
 			onButton(index){
 				if( index === this.optionIndex )
 				{
 					this.statusCls = "correct";
+					this.rgb( 0, 128, 0);
 					setTimeout(this.nextRound, 1000)
 				}
 				else
 				{
 					this.statusCls = "wrong";
+					this.rgb( 255, 0, 0);
 					setTimeout(()=>{
 						this.statusCls = 'pending';
 					}, 1000)

@@ -19,8 +19,10 @@
 <script>
     import {MediaType} from '../utils/MediaType';
     import MODES from '../../../enums/Mode';
+    import RgbMixin from './../mixins/Rgb';
 
     export default {
+        mixins: [RgbMixin],
         components: {
         },
 
@@ -55,6 +57,7 @@
                 }
             });
             Socket.on('test_rgb', () => {
+                this.setBodyColor(20, 20, 20);
                 this.rgb( 20, 20, 20);
             });
             Socket.on('test_rgb_sequence', () => {
@@ -86,7 +89,6 @@
 
 			},
 			onVideoEnded(){
-				console.log("video finished plaing");
 				this.clear();
 				this.nextItem();
 			},
@@ -106,27 +108,12 @@
                 }));
                 this.nextItem();
             },
-            rgbSequence( list )
-            {
-                return this.$http.post('http://localhost:3030/rgb/sequence', list, {})
-                    .then(resp => {
-                        console.log("rgb response", resp);
-                    });
-            },
-			setBodyColor( r, g, b)
+
+    		setBodyColor( r, g, b)
 			{
 				document.getElementsByTagName('body')[0].style.backgroundColor="rgb("+r+","+g+","+b+")";
 			},
-            rgb( r, g, b )
-            {
-				this.setBodyColor(r, g, b);
-                return this.$http.post('http://localhost:3030/rgb', { r: r, g: g, b: b}, {
-                    emulateJSON: true
-                })
-                .then(resp => {
-                    console.log("rgb response", resp);
-                });
-            },
+
 			clear(){
 				this.type = null;
 				this.src = null;
@@ -161,6 +148,7 @@
                 if( this.rgbList.length > 0 )
                 {
                     let rgbInfo = this.rgbList.shift();
+                    this.setBodyColor(rgbInfo.r, rgbInfo.g, rgbInfo.b);
                     this.rgb( rgbInfo.r, rgbInfo.g, rgbInfo.b );
                     this.rgbTimer = setTimeout(this.playItemRGB, rgbInfo.stepTime * 1000 );
                 }
@@ -168,7 +156,6 @@
 
             playItem( item )
             {
-				console.log("playItem", item);
                 this.type = item.type;
                 this.src = item.src;
 				this.rgbList = (item.rgbList) ? item.rgbList: [];

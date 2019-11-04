@@ -34,10 +34,15 @@
 
 <script>
     import MODES from '../../../enums/Mode';
+    import RgbMixin from './../mixins/Rgb';
     import GameView from '../../../enums/GameView';
     import {Games} from './Games';
 
+
     export default {
+
+        mixins: [RgbMixin],
+
         components: {
         },
 
