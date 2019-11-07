@@ -1,10 +1,14 @@
 <template>
-    <div id="app" class="cover-container d-flex h-100 p-3 mx-auto flex-column">
-        <div class="h-100 w-100 view-wrapper" v-if="view === GameView.GENERAL">
+    <div id="app" class="cover-container d-flex h-100  mx-auto flex-column">
+        <div class="view-wrapper" v-if="view === GameView.GENERAL">
             <div class="container-fluid games-list">
-                <div class="row" v-for="(game,index) in games" :key="index" v-bind:class="selectedGameClass(game,index)">
-                    <div class="col-sm-4 game-title">{{game.title}}</div>
-                    <div class="col-sm-8"><img v-bind:src="game.backgroundImage" /></div>
+                <div class="row align-items-center" v-for="(game,index) in games" :key="index" v-bind:class="selectedGameClass(game,index)">
+                    <div class="col-sm-4 game-title">
+                        <span class="align-middle">{{game.title}}</span>
+                    </div>
+                    <div class="col-sm-8 game-image">
+                        <img v-bind:src="game.backgroundImage" class="img-fluid" />
+                    </div>
                 </div>
             </div>
 

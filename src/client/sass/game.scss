@@ -25,11 +25,18 @@ body{
 		.games-list{
 			.row
 			{
+				height: 20vh;
 				&.selected-game{
 					background-color: rgba(105, 245, 157, 0.29);
 				}
 				.game-title{
-					font-size: 4rem;
+					font-size: 3.5rem;
+				}
+				.game-image{
+					img{
+						height: inherit;
+						max-height: 18vh;
+					}
 				}
 			}
 		}
@@ -37,7 +44,7 @@ body{
 		.game-dashboard-buttons{
 
 			position: absolute;
-			bottom: 0;
+			bottom: 5vh;
 
 			.row{
 				text-align: center;
