@@ -27,13 +27,14 @@ body{
 			{
 				height: 20vh;
 				&.selected-game{
-					background-color: rgba(105, 245, 157, 0.29);
+					background-color: #05d405;
 				}
 				.game-title{
 					font-size: 3.5rem;
 				}
 				.game-image{
 					img{
+						background-color: #FFFFFF;
 						height: inherit;
 						max-height: 18vh;
 					}

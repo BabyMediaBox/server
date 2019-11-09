@@ -169,11 +169,11 @@ app.get('/videos', (req, res) => {
 
 app.post('/button/:button', (req, res) => {
     let button = parseInt(req.params.button, 10);
-    if( mode === MODES.MEDIA && Config.mediaButtons.indexOf(button) > -1 )
+    
+    if( mode === MODES.MEDIA && mediaOnButtonPress.hasOwnProperty(button)  )
     {
         var listIndex = Math.floor(Math.random() * mediaOnButtonPress[req.params.button].length );
         io.sockets.emit('media_button_pressed', mediaOnButtonPress[req.params.button][listIndex] );
-        res.send('ok');
     }
     else if( button === Config.toggleModeButton )
     {
