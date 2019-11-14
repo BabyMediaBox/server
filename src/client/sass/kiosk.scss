@@ -18,10 +18,16 @@ body{
 	.dashboard
 	{
 		.mode{
-
-			background-color: grey;
+			background-color: #a5a5a5;
 			&.active{
 				background-color: $primary;
+				.label{
+					color: white;
+				}
+			}
+
+			.label{
+				font-size: 4rem;
 			}
 		}
 	}

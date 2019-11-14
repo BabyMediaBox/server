@@ -1,9 +1,11 @@
 <template>
     <div class="container-fluid h-100 dashboard" >
         <div class="row align-items-center h-50 mode" v-for="(mode,index) in modes" :key="index" v-bind:class="selectedModeClass(mode,index)">
-            {{$t(mode.title)}}
+            <h1 class="col-4 label">{{$t(mode.title)}}</h1>
+            <div class="col-8">
+                <img class="img-fluid" :src="mode.preview" />
+            </div>
         </div>
-
     </div>
 </template>
 
@@ -55,9 +57,11 @@
                 Selected: 0,
                 modes: [{
                     title: 'dashboard.video_player',
+                    preview: __Images__.menuVideoPlayerPreview,
                     path: '/play'
                 },{
                     title: 'dashboard.game',
+                    preview: __Images__.menuGamePreview,
                     path: '/game'
                 }]
             };

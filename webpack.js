@@ -90,6 +90,7 @@ const config = {
     plugins: [
         new webpack.DefinePlugin({
             __Config__: Config,
+            __Images__: JSON.stringify(Config.images),
             __GameButtons__: JSON.stringify(Config.gameButtons)
         }),
         new VueLoaderPlugin(),
