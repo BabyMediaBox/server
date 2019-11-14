@@ -1,30 +1,13 @@
 <template>
-    <div id="app" class="cover-container d-flex h-100  mx-auto flex-column">
+    <div id="app" class="cover-container d-flex h-100  mx-auto flex-column games">
         <div class="view-wrapper">
             <div class="container-fluid games-list">
                 <div class="row align-items-center" v-for="(game,index) in games" :key="index" v-bind:class="selectedGameClass(game,index)">
                     <div class="col-sm-4 game-title">
-                        <span class="align-middle">{{game.title}}</span>
+                        <span class="align-middle">{{ $t(game.translation) }}</span>
                     </div>
                     <div class="col-sm-8 game-image">
                         <img v-bind:src="game.backgroundImage" class="img-fluid" />
-                    </div>
-                </div>
-            </div>
-
-            <div class="container-fluid game-dashboard-buttons">
-                <div class="row">
-                    <div class="col-sm-3 game-btn btn-1">
-                        <img src="pictures/buttons/circle.png" class="img-thumbnail"/>
-                    </div>
-                    <div class="col-sm-3 game-btn btn-2">
-                        <img src="pictures/buttons/square.png" class="img-thumbnail"/>
-                    </div>
-                    <div class="col-sm-3 game-btn btn-3">
-                        <img src="pictures/buttons/star.png" class="img-thumbnail"/>
-                    </div>
-                    <div class="col-sm-3 game-btn btn-4">
-                        <img src="pictures/buttons/triangle.png" class="img-thumbnail" />
                     </div>
                 </div>
             </div>
@@ -55,7 +38,7 @@
                 {
                     this.Selected -= 1;
                 }
-                else if( button === __Config__.downButton && this.Selected+1 <= Games.List.length)
+                else if( button === __Config__.downButton && this.Selected+1 < Games.List.length)
                 {
                     this.Selected += 1;
                 }

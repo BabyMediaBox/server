@@ -8,6 +8,9 @@ const messages = {
 		dashboard : {
 			video_player: 'Музика',
 			game: "Игра"
+		},
+		games: {
+			shapes: "Форми"
 		}
 	}
 };

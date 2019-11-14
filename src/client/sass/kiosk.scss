@@ -22,7 +22,7 @@ body{
 			&.active{
 				background-color: $primary;
 				.label{
-					color: white;
+					color: #FFFFFF;
 				}
 			}
 
@@ -42,6 +42,36 @@ body{
 				img{
 					height: inherit;
 					padding:5px 15px 5px 5px;
+				}
+			}
+		}
+	}
+
+	.games{
+		.games-list {
+			.row {
+				height: 20vh;
+				background-color: #a5a5a5;
+
+				.game-title {
+					font-size: 3.5rem;
+				}
+
+				&.selected-game {
+					background-color: $primary;
+					.game-title{
+						color: #FFFFFF;
+					}
+				}
+
+
+
+				.game-image {
+					img {
+						background-color: #FFFFFF;
+						height: inherit;
+						max-height: 18vh;
+					}
 				}
 			}
 		}
@@ -71,47 +101,6 @@ body{
 
 		text-align: center;
 
-		.games-list {
-			.row {
-				height: 20vh;
 
-				&.selected-game {
-					background-color: #05d405;
-				}
-
-				.game-title {
-					font-size: 3.5rem;
-				}
-
-				.game-image {
-					img {
-						background-color: #FFFFFF;
-						height: inherit;
-						max-height: 18vh;
-					}
-				}
-			}
-
-			.game-dashboard-buttons {
-
-				position: absolute;
-				bottom: 5vh;
-
-				.row {
-					text-align: center;
-
-					.game-btn {
-						height: 15vh;
-						width: 15vh;
-
-						img {
-							margin: 0 auto;
-						}
-
-					}
-				}
-			}
-
-		}
 	}
 }
