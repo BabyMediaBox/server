@@ -40,6 +40,10 @@
 
 			nextRound(){
 				this.optionIndex = indexOptions[Math.floor(Math.random() * 4)];
+				while(this.optionIndex === this.previousIndex){
+					this.optionIndex = indexOptions[Math.floor(Math.random() * 4)];
+				}
+
 				this.option = options[this.optionIndex];
 				this.statusCls = 'pending';
 				this.rgbClear();
@@ -52,6 +56,7 @@
 					if( index === this.optionIndex )
 					{
 						this.statusCls = "correct";
+						this.previousIndex = this.optionIndex;
 						this.rgb( 0, 128, 0);
 						setTimeout(this.nextRound, 1000)
 					}
@@ -70,6 +75,7 @@
 		data() {
 			return {
 				optionIndex : __Config__.selectButton,
+				previousIndex: __Config__.selectButton,
 				option: options[__Config__.selectButton],
 				statusCls: 'pending'
 			};
