@@ -26,14 +26,18 @@
 <script>
 	require('./shapes.scss');
 	import RgbMixin from './../../mixins/Rgb';
-	const options = {
-		4 : { name: "circle", src: "pictures/shapes/circle.png" },
-		5 : { name: "square", src: "pictures/shapes/square.png" },
-		6 : { name: "star", src: "pictures/shapes/star.png" },
-		7 : { name: "triangle", src: "pictures/shapes/triangle.png" },
-	};
 
-	const indexOptions = [4, 5, 6, 7];
+	const options = {};
+	const indexOptions = [];
+
+	for( let index in __GameButtons__)
+	{
+		indexOptions.push(parseInt(index));
+		options[parseInt(index)] = {
+			name: __GameButtons__[index],
+			src: `pictures/shapes/${__GameButtons__[index]}.png`
+		}
+	}
 
 	export default {
 
@@ -42,9 +46,13 @@
 		components: {
 		},
 
+		beforeDestroy: function(){
+			Socket.off('button_pressed', this.onSocketButton);
+		},
+
 		mounted: function()
 		{
-
+			Socket.on('button_pressed', this.onSocketButton);
 		},
 
 		methods: {
@@ -56,28 +64,32 @@
 				this.rgbClear();
 			},
 
-			onButton(index){
-				if( index === this.optionIndex )
+			onSocketButton(index)
+			{
+				if( indexOptions.indexOf(index) > -1 )
 				{
-					this.statusCls = "correct";
-					this.rgb( 0, 128, 0);
-					setTimeout(this.nextRound, 1000)
-				}
-				else
-				{
-					this.statusCls = "wrong";
-					this.rgb( 255, 0, 0);
-					setTimeout(()=>{
-						this.statusCls = 'pending';
-					}, 1000)
+					if( index === this.optionIndex )
+					{
+						this.statusCls = "correct";
+						this.rgb( 0, 128, 0);
+						setTimeout(this.nextRound, 1000)
+					}
+					else
+					{
+						this.statusCls = "wrong";
+						this.rgb( 255, 0, 0);
+						setTimeout(()=>{
+							this.statusCls = 'pending';
+						}, 1000)
+					}
 				}
 			}
 		},
 
 		data() {
 			return {
-				optionIndex : 4,
-				option: options[4],
+				optionIndex : __Config__.selectButton,
+				option: options[__Config__.selectButton],
 				statusCls: 'pending'
 			};
 		},

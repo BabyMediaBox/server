@@ -11,9 +11,11 @@ export default {
 		rgbSequence( list )
 		{
 			return this.$http.post('http://localhost:3030/rgb/sequence', list, {})
-				.then(resp => {
-					console.log("rgb response", resp);
-				});
+			.then(resp => {
+				console.log("rgb response", resp);
+			}).catch((err)=>{
+				console.log("rgbSequence error", err);
+			});
 		},
 		rgb( r, g, b )
 		{
@@ -21,9 +23,11 @@ export default {
 			return this.$http.post('http://localhost:3030/rgb', { r: r, g: g, b: b}, {
 				emulateJSON: true
 			})
-				.then(resp => {
-					console.log("rgb response", resp);
-				});
+			.then(resp => {
+				console.log("rgb response", resp);
+			}).catch((err)=>{
+				console.log("rgb error", err);
+			});
 		},
 	}
 }

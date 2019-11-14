@@ -9,16 +9,9 @@ const prettyMs = require('pretty-ms');
 
 const PlaylistDir = __dirname + "/public/playlists/";
 const VideosDir = __dirname + "/public/videos/";
-const MODES = require('./src/enums/Mode');
 
 let volume = 0;
 let kioskSerialConnected = false;
-let mode = MODES.MEDIA;
-let mediaOnButtonPress = [];
-if( Config['buttons'])
-{
-	mediaOnButtonPress = Config['buttons'];
-}
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -169,28 +162,7 @@ app.get('/videos', (req, res) => {
 
 app.post('/button/:button', (req, res) => {
     let button = parseInt(req.params.button, 10);
-    
-    if( mode === MODES.MEDIA && mediaOnButtonPress.hasOwnProperty(button)  )
-    {
-        var listIndex = Math.floor(Math.random() * mediaOnButtonPress[req.params.button].length );
-        io.sockets.emit('media_button_pressed', mediaOnButtonPress[req.params.button][listIndex] );
-    }
-    else if( button === Config.toggleModeButton )
-    {
-        if( mode === MODES.GAME )
-        {
-            mode = MODES.MEDIA;
-        }
-        else if( mode === MODES.MEDIA )
-        {
-            mode = MODES.GAME;
-        }
-        io.sockets.emit('change_mode', mode);
-    }
-    else
-    {
-        io.sockets.emit('button_pressed', button);
-    }
+    io.sockets.emit('button_pressed', button);
     res.send('ok');
 });
 
@@ -212,5 +184,8 @@ io.on('connection', (socket) => {
     });
     socket.on('remote_test_rgb_sequence', function(){
         socket.broadcast.emit('test_rgb_sequence');
+    });
+    socket.on('remote_button_pressed', function(data){
+        socket.broadcast.emit('button_pressed', data);
     });
 });

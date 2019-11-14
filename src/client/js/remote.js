@@ -4,6 +4,7 @@ require('bootstrap');
 import Vue from "vue";
 import VueRouter from 'vue-router';
 import VueResource from 'vue-resource';
+import i18n from "./remote/i18n";
 
 Vue.use(VueResource);
 Vue.use(VueRouter);
@@ -34,6 +35,7 @@ import App from './remote/App.vue';
 
 new Vue({
     el: '#app',
+    i18n,
     router: router,
     template: '<App/>',
     components: { App }

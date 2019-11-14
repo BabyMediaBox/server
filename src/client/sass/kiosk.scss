@@ -12,6 +12,36 @@ body{
 	transition: background-color 1000ms linear;
 }
 
+.kiosk{
+
+	padding: 0;
+	.dashboard
+	{
+		.mode{
+
+			background-color: grey;
+			&.active{
+				background-color: $primary;
+			}
+		}
+	}
+
+	.player{
+		overflow: hidden;
+		.list-videos{
+			.list-group-item{
+				height: 20vh;
+				padding:0;
+				text-align: left;
+				img{
+					height: inherit;
+					padding:5px 15px 5px 5px;
+				}
+			}
+		}
+	}
+}
+
 #app
 {
     height: 100%;
@@ -30,4 +60,52 @@ body{
             font-size: 32pt;
         }
     }
+
+	.view-wrapper {
+
+		text-align: center;
+
+		.games-list {
+			.row {
+				height: 20vh;
+
+				&.selected-game {
+					background-color: #05d405;
+				}
+
+				.game-title {
+					font-size: 3.5rem;
+				}
+
+				.game-image {
+					img {
+						background-color: #FFFFFF;
+						height: inherit;
+						max-height: 18vh;
+					}
+				}
+			}
+
+			.game-dashboard-buttons {
+
+				position: absolute;
+				bottom: 5vh;
+
+				.row {
+					text-align: center;
+
+					.game-btn {
+						height: 15vh;
+						width: 15vh;
+
+						img {
+							margin: 0 auto;
+						}
+
+					}
+				}
+			}
+
+		}
+	}
 }
