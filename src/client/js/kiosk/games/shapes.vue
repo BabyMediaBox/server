@@ -1,25 +1,6 @@
 <template>
-	<div class="h-100 w-100 view-wrapper game-shapes">
-		<div class="container-fluid game-view">
-			<img v-bind:src="option.src" class="img-thumbnail" v-bind:class="statusCls"/>
-		</div>
-
-		<div class="container-fluid game-dashboard-buttons">
-			<div class="row">
-				<div class="col-sm-3 game-btn btn-1">
-					<img src="pictures/buttons/circle.png" class="img-thumbnail"/>
-				</div>
-				<div class="col-sm-3 game-btn btn-2">
-					<img src="pictures/buttons/square.png" class="img-thumbnail"/>
-				</div>
-				<div class="col-sm-3 game-btn btn-3">
-					<img src="pictures/buttons/star.png" class="img-thumbnail"/>
-				</div>
-				<div class="col-sm-3 game-btn btn-4">
-					<img src="pictures/buttons/triangle.png" class="img-thumbnail" />
-				</div>
-			</div>
-		</div>
+	<div class="h-100 w-100 view-wrapper game-shapes" v-bind:class="statusCls">
+		<img v-bind:src="option.src" class="current-shape mx-auto d-block" />
 	</div>
 </template>
 
