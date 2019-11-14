@@ -17,7 +17,9 @@ else
         else
             cmd="ffmpeg -i $1 -c:v libvpx-vp9 -b:v 1M "$2$file_name".webm"
             $($cmd)
+            cmd="ffmpeg -i $1 -ss 00:00:10 "$2$file_name".jpg"
+            $($cmd)
         fi
     fi
-    
+
 fi
