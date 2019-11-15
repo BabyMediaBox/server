@@ -4,17 +4,24 @@
             <img :src="src" />
         </div>
         <div class="h-100 w-100 media-wrapper" v-else-if="type === MediaType.video">
-            <video @play="onVideoPlay" @ended="onVideoEnded" :src="src" id="video_player" autoplay></video>
+            <video @play="onVideoPlay" @ended="onVideoEnded"  id="video_player" autoplay :src="src">
+            </video>
         </div>
         <div class="h-100 w-100 media-wrapper" v-else-if="type === MediaType.youtube">
             <iframe width="100%" height="100%" :src="src" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         </div>
         <main role="main" class="inner cover" v-else>
-            <ul class="list-group list-videos">
-                <li class="list-group-item" v-bind:id="'video-'+index" v-for="(video,index) in videos" :key="index" v-bind:class="getSelectedVideoClass(video,index)">
-                    <img src="pictures/example.jpeg" class="img-fluid"/> {{ video.name }} ( {{video._duration}} )
-                </li>
-            </ul>
+            <div class="list-videos">
+                <div class="row" v-bind:id="'video-'+index" v-for="(video,index) in videos" :key="index" v-bind:class="getSelectedVideoClass(video,index)">
+                    <div class="col-sm-6 col-md-6 col-lg-4 ">
+                        <img :src="video.thumb" class="img-fluid"/>
+                    </div>
+                    <div class="col-8">
+                        <h3>{{ video.name }}</h3>
+                        {{video._duration}}
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
 </template>
@@ -34,7 +41,6 @@
         },
         mounted: function()
         {
-
             Socket.on('button_pressed', this.onSocketButton);
             this.$http.get('/videos', {}, {
                 emulateJSON: true
@@ -42,26 +48,6 @@
             .then(resp => {
                 this.videos = resp.data;
             });
-
-            /*Socket.on('media_button_pressed', ( mediaItem ) => {
-                if( mediaItem )
-                {
-                    this.playFromButton(mediaItem);
-                }
-            });
-
-            Socket.on('play_media', ( data ) => {
-                console.log("play_media", data);
-                if( data.type === MediaType.playlist)
-                {
-                    this.loadPlaylist( data );
-                }
-                else
-                {
-                    this.queue = [];
-                    this.playItem( data );
-                }
-            });*/
         },
 
         methods: {
@@ -101,27 +87,13 @@
                     }
                 }
             },
-			onVideoPlay(){},
+			onVideoPlay(){
+                console.log("start");
+            },
 			onVideoEnded(){
 				this.clear();
 				this.nextItem();
 			},
-            playFromButton( mediaItem )
-            {
-                if( window.currentEndTimeout )
-                {
-                    clearTimeout(window.currentEndTimeout);
-                }
-                this.queue.unshift( function()
-                {
-                    this.scope.playItem.call( this.scope, this.item );
-                    window.currentEndTimeout = setTimeout( this.scope.nextItem, this.item.duration * 1000 );
-                }.bind({
-                    scope: this,
-                    item: mediaItem
-                }));
-                this.nextItem();
-            },
 
     		setBodyColor( r, g, b)
 			{
@@ -180,31 +152,6 @@
 				{
 					window.currentEndTimeout = setTimeout( this.nextItem, item.duration * 1000 );
 				}
-            },
-
-            loadPlaylist( data )
-            {
-                this.type = null;
-                this.src = null;
-                this.queue = [];
-                this.rgbList = [];
-
-                this.$http.get('/playlists/'+data.src, {}, {
-                    emulateJSON: true
-                })
-                .then(resp => {
-                    this.queue = [];
-                    resp.data.list.forEach( (item) => {
-                        this.queue.push( function()
-                        {
-                            this.scope.playItem.call( this.scope, this.item );
-                        }.bind({
-                            scope: this,
-                            item: item
-                        }));
-                    });
-                    this.nextItem();
-                });
             }
         },
 

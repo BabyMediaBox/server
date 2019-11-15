@@ -35,13 +35,26 @@ body{
 	.player{
 		overflow: hidden;
 		.list-videos{
-			.list-group-item{
+			.row {
 				height: 20vh;
-				padding:0;
+				padding:0 0 15px 0;
+				//margin:0 0 15px 0;
 				text-align: left;
+
 				img{
-					height: inherit;
-					padding:5px 15px 5px 5px;
+					padding-top: 5px;
+					max-height: 18vh;
+					//height: inherit;
+					//max-width: 300px;
+				}
+
+				h3{
+					padding-top: 15px;
+				}
+
+				&.active{
+					background-color: $primary;
+					color: #FFFFFF;
 				}
 			}
 		}
