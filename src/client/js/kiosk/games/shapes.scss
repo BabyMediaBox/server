@@ -1,0 +1,17 @@
+.game-shapes
+{
+	&.wrong{
+		background-color: #dc3545;
+	}
+	&.correct{
+		background-color: #05d405;
+	}
+	&.pending{
+		background-color: #a5a5a5;
+	}
+
+	.current-shape
+	{
+		height: 100%;
+	}
+}

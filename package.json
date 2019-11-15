@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "send-button" : "NODE_PATH=. node src/scripts/send_button.js",
+    "send-button": "NODE_PATH=. node src/scripts/send_button.js",
     "process-videos": "NODE_PATH=. node src/process/videos.js",
     "dev-server": "nodemon -w index.js",
     "dev-build": "webpack --config webpack.js --watch",
@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/BabyMediaBox/server#readme",
   "dependencies": {
+    "async": "^3.1.0",
     "babel-core": "^6.26.3",
     "babel-loader": "8.0.6",
     "body-parser": "1.19.0",
@@ -42,6 +43,7 @@
     "socket.io-client": "2.3.0",
     "style-loader": "1.0.0",
     "vue": "2.6.10",
+    "vue-i18n": "^8.15.0",
     "vue-loader": "15.7.1",
     "vue-resource": "1.5.1",
     "vue-router": "3.1.3",

@@ -1,16 +1,17 @@
 {
     "port": 4010,
-    "mediaButtons" : [1,2],
-    "toggleModeButton": 3,
-    "gameButtons": [4,5,6,7],
-    "buttons": {
-        "1": [
-            { "name" : "Example video", "type" : 1, "src" : "videos/example.mp4", "duration": 80},
-            { "name" : "Example youtube video", "type" : 2, "src" : "https://www.youtube.com/embed/cVFhMkOp8n4?autoplay=1&showinfo=0&controls=0", "duration": 145}
-        ],
-        "2" : [
-            { "name" : "Example video", "type" : 1, "src" : "videos/example.mp4", "duration": 80},
-            { "name" : "Example youtube video", "type" : 2, "src" : "https://www.youtube.com/embed/cVFhMkOp8n4?autoplay=1&showinfo=0&controls=0", "duration": 145}
-        ]
+    "upButton" : 3,
+    "dashboardButton": 2,
+    "downButton": 1,
+    "selectButton": 4,
+    "images" :{
+        "menuVideoPlayerPreview": "pictures/examples/videos.png",
+        "menuGamePreview": "pictures/examples/games.png"
+    },
+    "gameButtons": {
+        "4":"circle",
+        "5":"square",
+        "6":"star",
+        "7":"triangle"
     }
 }

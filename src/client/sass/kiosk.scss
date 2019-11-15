@@ -12,6 +12,85 @@ body{
 	transition: background-color 1000ms linear;
 }
 
+.kiosk{
+
+	padding: 0;
+	.dashboard
+	{
+		.mode{
+			background-color: #a5a5a5;
+			&.active{
+				background-color: $primary;
+				.label{
+					color: #FFFFFF;
+				}
+			}
+
+			.label{
+				font-size: 4rem;
+			}
+		}
+	}
+
+	.player{
+		overflow: hidden;
+		.list-videos{
+			.row {
+				height: 20vh;
+				padding:0 0 15px 0;
+				//margin:0 0 15px 0;
+				text-align: left;
+
+				img{
+					padding-top: 5px;
+					max-height: 18vh;
+					//height: inherit;
+					//max-width: 300px;
+				}
+
+				h3{
+					padding-top: 15px;
+				}
+
+				&.active{
+					background-color: $primary;
+					color: #FFFFFF;
+				}
+			}
+		}
+	}
+
+	.games{
+		.games-list {
+			.row {
+				height: 20vh;
+				background-color: #a5a5a5;
+
+				.game-title {
+					font-size: 3.5rem;
+				}
+
+				&.selected-game {
+					background-color: $primary;
+					.game-title{
+						color: #FFFFFF;
+					}
+				}
+
+
+
+				.game-image {
+					img {
+						background-color: #FFFFFF;
+						height: inherit;
+						max-height: 18vh;
+					}
+				}
+			}
+		}
+	}
+}
+
 #app
 {
     height: 100%;
@@ -30,4 +109,11 @@ body{
             font-size: 32pt;
         }
     }
+
+	.view-wrapper {
+
+		text-align: center;
+
+
+	}
 }

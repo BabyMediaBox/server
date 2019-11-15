@@ -1,7 +1,8 @@
-let webpack = require('webpack');
-let path = require('path');
-let ExtractTextPlugin = require('extract-text-webpack-plugin');
-let VueLoaderPlugin = require('vue-loader/lib/plugin')
+const webpack = require('webpack');
+const path = require('path');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const Config = require('./config');
 
 function resolve (dir) {
     console.log( '=', path.join(__dirname, '..', dir));
@@ -71,7 +72,6 @@ let vueLoaderConfig = {
 const config = {
     mode: "development",
     entry: {
-        game: './src/client/js/game.js',
         kiosk: './src/client/js/kiosk.js',
         remote: './src/client/js/remote.js',
         manager: './src/client/js/manager.js'
@@ -88,6 +88,11 @@ const config = {
         }
     },
     plugins: [
+        new webpack.DefinePlugin({
+            __Config__: Config,
+            __Images__: JSON.stringify(Config.images),
+            __GameButtons__: JSON.stringify(Config.gameButtons)
+        }),
         new VueLoaderPlugin(),
         new webpack.DefinePlugin({
             IS_DEV: IS_DEV
