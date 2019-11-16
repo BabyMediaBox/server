@@ -21,6 +21,8 @@
             Socket.off('set_kiosk_volume', this.onSocketVolume);
             Socket.off('kiosk_shutdown', this.onSocketShutdown);
             Socket.off('reload_page', this.onSocketReloadPage);
+            Socket.off("rgb", this.onSocketRgb);
+            Socket.off("rgb_sequence", this.onSocketRgbSequence);
         },
 
         mounted: function()
@@ -29,9 +31,17 @@
             Socket.on('set_kiosk_volume', this.onSocketVolume);
             Socket.on('kiosk_shutdown', this.onSocketShutdown);
             Socket.on('reload_page', this.onSocketReloadPage);
+            Socket.on("rgb", this.onSocketRgb);
+            Socket.on("rgb_sequence", this.onSocketRgbSequence);
         },
 
         methods: {
+            onSocketRgb(data) {
+              this.rgb(data.r, data.g, data.b);
+            },
+            onSocketRgbSequence(data) {
+              this.rgbSequence(data);
+            },
             onSocketButton( btn ) {
                 if (btn === __Config__.dashboardButton)
                 {

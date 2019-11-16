@@ -179,11 +179,11 @@ io.on('connection', (socket) => {
     socket.on('remote_reload_kiosk_page', function(){
         socket.broadcast.emit('reload_page');
     });
-    socket.on('remote_test_rgb', function(){
-        socket.broadcast.emit('test_rgb');
+    socket.on('remote_rgb', function(data){
+        socket.broadcast.emit('rgb', data);
     });
-    socket.on('remote_test_rgb_sequence', function(){
-        socket.broadcast.emit('test_rgb_sequence');
+    socket.on('remote_rgb_sequence', function(data){
+        socket.broadcast.emit('rgb_sequence', data);
     });
     socket.on('remote_button_pressed', function(data){
         socket.broadcast.emit('button_pressed', data);

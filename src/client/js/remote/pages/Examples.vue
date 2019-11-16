@@ -58,10 +58,15 @@
 
         methods: {
             testRGBLedStrip: () => {
-                Socket.emit('remote_test_rgb', {});
+                Socket.emit('remote_rgb', {r: 100, g: 100, b: 100});
             },
             testRGBLedStripSequence: () => {
-                Socket.emit('remote_test_rgb_sequence', {});
+                let sequence = [
+                    {r:20, g:100, b:160},
+                    {r:30, g:120, b:170},
+                    {r:40, g:140, b:180}
+                ];
+                Socket.emit('remote_rgb_sequence', sequence);
             },
             playPicture: function(){
                 Socket.emit('play_media', { type : MediaType.picture, src: 'pictures/example.jpeg'});
