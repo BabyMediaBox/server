@@ -37,6 +37,7 @@
         },
 
         beforeDestroy: function(){
+            this.clear();
             Socket.off('button_pressed', this.onSocketButton);
         },
         mounted: function()
@@ -142,6 +143,8 @@
 
             playItem( item )
             {
+                this.clear();
+
                 this.type = item.type;
                 this.src = item.src;
 				this.rgbList = (item.rgbList) ? item.rgbList: [];

@@ -1,6 +1,6 @@
 <template>
     <div class="kiosk container-fluid h-100">
-        <router-view></router-view>
+        <router-view ref="content"></router-view>
     </div>
 </template>
 
@@ -22,7 +22,7 @@
             Socket.off('kiosk_shutdown', this.onSocketShutdown);
             Socket.off('reload_page', this.onSocketReloadPage);
             Socket.off("rgb", this.onSocketRgb);
-            Socket.off("rgb_sequence", this.onSocketRgbSequence);
+            Socket.off('play_media', this.onSocketPlayMedia);
         },
 
         mounted: function()
@@ -32,18 +32,24 @@
             Socket.on('kiosk_shutdown', this.onSocketShutdown);
             Socket.on('reload_page', this.onSocketReloadPage);
             Socket.on("rgb", this.onSocketRgb);
-            Socket.on("rgb_sequence", this.onSocketRgbSequence);
+            Socket.on('play_media', this.onSocketPlayMedia);
         },
 
         methods: {
+            onSocketPlayMedia(data){
+              if(this.$route.path !== '/play')
+              {
+                this.$router.push('/play');
+              }
+              setTimeout(() => {
+                this.$refs.content.playItem(data);
+              }, 1000);
+            },
             onSocketRgb(data) {
               this.rgb(data.r, data.g, data.b);
             },
-            onSocketRgbSequence(data) {
-              this.rgbSequence(data);
-            },
             onSocketButton( btn ) {
-                if (btn === __Config__.dashboardButton)
+                if (btn === __Config__.dashboardButton && this.$route.path !== '/')
                 {
                     this.$router.push('/');
                 }
@@ -52,12 +58,16 @@
                 this.$http.post('http://localhost:3030/volume', { volume: volume }, {})
                     .then(resp => {
                         console.log("set volume response", resp);
+                    }).catch( (err) => {
+                      console.log('set volume response err', err);
                     });
             },
             onSocketShutdown(){
                 this.$http.post('http://localhost:3030/shutdown', {}, {})
                     .then(resp => {
                         console.log("shutdown response", resp);
+                    }).catch( (err) => {
+                      console.log('shutdown request err', err);
                     });
             },
             onSocketReloadPage(){
@@ -65,8 +75,7 @@
             }
         },
         data() {
-            return {
-            };
+            return {};
         },
 
     }

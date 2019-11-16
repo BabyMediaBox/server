@@ -31,12 +31,6 @@
                     </button>
                 </li>
 
-                <li class="list-group-item">
-                    <button class="w-100 btn btn-primary" v-on:click="testRGBLedStripSequence">
-                        Test RGB Led strip sequence
-                    </button>
-                </li>
-
             </ul>
         </div>
 
@@ -59,14 +53,6 @@
         methods: {
             testRGBLedStrip: () => {
                 Socket.emit('remote_rgb', {r: 100, g: 100, b: 100});
-            },
-            testRGBLedStripSequence: () => {
-                let sequence = [
-                    {r:20, g:100, b:160},
-                    {r:30, g:120, b:170},
-                    {r:40, g:140, b:180}
-                ];
-                Socket.emit('remote_rgb_sequence', sequence);
             },
             playPicture: function(){
                 Socket.emit('play_media', { type : MediaType.picture, src: 'pictures/example.jpeg'});

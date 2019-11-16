@@ -8,15 +8,6 @@ export default {
 			this.rgb(r,g,b);
 			setTimeout(this.rgbClear, t * 1000 );
 		},
-		rgbSequence( list )
-		{
-			return this.$http.post('http://localhost:3030/rgb/sequence', list, {})
-			.then(resp => {
-				console.log("rgb response", resp);
-			}).catch((err)=>{
-				console.log("rgbSequence error", err);
-			});
-		},
 		rgb( r, g, b )
 		{
 
