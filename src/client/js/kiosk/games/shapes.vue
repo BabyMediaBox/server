@@ -34,16 +34,25 @@
 		mounted: function()
 		{
 			Socket.on('button_pressed', this.onSocketButton);
+			this.notifySelected();
 		},
 
 		methods: {
 
+			notifySelected(){
+				Socket.emit('kiosk_notify', {
+					type: 'message',
+					data: {
+						message: `Game ${this.$t('games.shapes')} shape: ${options[this.optionIndex].name}`
+					}
+				});
+			},
 			nextRound(){
 				this.optionIndex = indexOptions[Math.floor(Math.random() * 4)];
 				while(this.optionIndex === this.previousIndex){
 					this.optionIndex = indexOptions[Math.floor(Math.random() * 4)];
 				}
-
+				this.notifySelected();
 				this.option = options[this.optionIndex];
 				this.statusCls = 'pending';
 				this.rgbClear();

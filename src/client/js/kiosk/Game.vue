@@ -30,19 +30,29 @@
         mounted()
         {
             Socket.on('button_pressed', this.onSocketButton);
+            this.notifySelected();
         },
 
         methods: {
+            notifySelected(){
+                Socket.emit('kiosk_notify', {
+                    type: 'message',
+                    data: {
+                        message: `Game select : ${this.$t(Games.List[this.Selected].translation)}`
+                    }
+                });
+            },
             onSocketButton: function(button){
                 if( button === __Config__.upButton  && this.Selected > 0)
                 {
                     this.Selected -= 1;
+                    this.notifySelected();
                 }
                 else if( button === __Config__.downButton && this.Selected+1 < Games.List.length)
                 {
                     this.Selected += 1;
+                    this.notifySelected();
                 }
-
                 else if( button === __Config__.selectButton )
                 {
                     this.$router.push(Games.List[this.Selected].path);

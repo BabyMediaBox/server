@@ -1,19 +1,12 @@
 import Vue from 'vue';
 import VueI18n from 'vue-i18n';
+import _ from 'lodash';
+import GeneralLocale from './../locale/general';
+import RemoteLocale from './../locale/remote';
 
 Vue.use(VueI18n);
 
-const messages = {
-	'bg': {
-		buttons: {
-			gameButton: 'За игра'
-		}
-	}
-};
-messages['bg']['buttons'][__Config__.upButton] = 'Нагоре';
-messages['bg']['buttons'][__Config__.downButton] = 'Надолу';
-messages['bg']['buttons'][__Config__.selectButton] = 'Избор';
-messages['bg']['buttons'][__Config__.dashboardButton] = 'Начало';
+let messages = _.merge({}, RemoteLocale, GeneralLocale);
 
 const i18n = new VueI18n({
 	locale: 'bg',

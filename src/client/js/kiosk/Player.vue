@@ -48,10 +48,27 @@
             })
             .then(resp => {
                 this.videos = resp.data;
+                this.notifySelected();
             });
         },
 
         methods: {
+            nofifyClear(){
+                Socket.emit('kiosk_notify', {
+                    type: 'message',
+                    data: {
+                        message: ''
+                    }
+                });
+            },
+            notifySelected(){
+                Socket.emit('kiosk_notify', {
+                    type: 'message',
+                    data: {
+                        message: `Selected video : ${this.videos[this.Selected].name} (${this.videos[this.Selected]._duration})`
+                    }
+                });
+            },
             getSelectedVideoClass(video, index)
             {
                 if( this.Selected === index)
@@ -71,6 +88,7 @@
                     {
                         this.Selected-=1;
                         document.getElementById('video-'+this.Selected).scrollIntoView();
+                        this.notifySelected();
                     }
                 }
                 else if( btn === __Config__.selectButton )
@@ -80,10 +98,10 @@
                 }
                 else if ( btn === __Config__.downButton )
                 {
-
                     if( this.Selected+1 < this.videos.length)
                     {
                         this.Selected+=1;
+                        this.notifySelected();
                         document.getElementById('video-'+this.Selected).scrollIntoView();
                     }
                 }
@@ -107,11 +125,13 @@
 				this.queue = [];
 				this.rgbList = [];
 				this.setBodyColor(255, 255, 255);
+                this.nofifyClear();
 			},
             nextItem()
             {
                 if( this.queue.length > 0)
                 {
+                    this.nofifyClear();
                     let call = this.queue.shift();
                     call();
                 }
@@ -144,7 +164,12 @@
             playItem( item )
             {
                 this.clear();
-
+                Socket.emit('kiosk_notify', {
+                    type: 'message',
+                    data: {
+                        message: `Video playing : ${item.name} (${item._duration})`
+                    }
+                });
                 this.type = item.type;
                 this.src = item.src;
 				this.rgbList = (item.rgbList) ? item.rgbList: [];

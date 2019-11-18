@@ -188,4 +188,8 @@ io.on('connection', (socket) => {
     socket.on('remote_button_pressed', function(data){
         socket.broadcast.emit('button_pressed', data);
     });
+    socket.on('kiosk_notify', function(data){
+        console.log("kiosk notify remote", arguments);
+        socket.broadcast.emit('remote_notify', data);
+    });
 });

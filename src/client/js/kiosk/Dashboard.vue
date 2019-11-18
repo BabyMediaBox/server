@@ -20,15 +20,25 @@
         mounted: function()
         {
             Socket.on('button_pressed', this.onSocketButton);
+            this.notifySelected();
         },
 
         methods: {
+            notifySelected(){
+                Socket.emit('kiosk_notify', {
+                    type: 'message',
+                    data: {
+                        message: `Dashboard: ${this.$t(this.modes[this.Selected].title)}`
+                    }
+                });
+            },
             onSocketButton( btn ){
                 if( btn === __Config__.upButton )
                 {
                     if(this.Selected-1 >= 0)
                     {
                         this.Selected-=1;
+                        this.notifySelected();
                     }
                 }
                 else if( btn === __Config__.selectButton )
@@ -41,6 +51,7 @@
                     if( this.Selected+1 < this.modes.length)
                     {
                         this.Selected+=1;
+                        this.notifySelected();
                     }
                 }
             },
