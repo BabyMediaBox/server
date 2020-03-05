@@ -55,7 +55,9 @@
                 }
             },
             onSocketVolume(volume) {
-                this.$http.post('http://localhost:3030/volume', { volume: volume }, {})
+                this.$http.post('http://localhost:3030/volume', { volume: volume }, {
+                    emulateJSON: true
+                })
                     .then(resp => {
                         console.log("set volume response", resp);
                     }).catch( (err) => {
